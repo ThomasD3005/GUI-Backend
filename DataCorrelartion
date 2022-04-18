@@ -1,0 +1,33 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.set()
+
+flights16 = pd.read_csv("filepath")
+flight_df = pd.DataFrame(flights16)
+flight_df["fare"] = flight_df["fare"].astype(int)
+
+answers = ["scatter", "histogram"]
+
+def user_inp():
+    inp_1 = input(" Do you want a scatter or histogram? ").lower()
+    if inp_1 in answers:
+        grapher(inp_1)
+    return inp_1
+
+
+def grapher(inp_1):
+    if inp_1 == "scatter":
+        x = sns.lmplot(x="fare", y="nsmiles", data=flight_df, fit_reg=True)
+
+    if inp_1 == "histogram":
+        x = flight_df["fare"]
+        y = flight_df["nsmiles"]
+        
+        plt.legend()
+        plt.show()
+
+
+user_inp()
