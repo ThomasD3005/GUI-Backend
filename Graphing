@@ -1,0 +1,44 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def graph_it():
+    #Filepaths to csv files 
+    doc1 = pd.read_csv("filepath")
+    doc2 = pd.read_csv("filepath")
+    doc3 = pd.read_csv("filepath")
+    doc4 = pd.read_csv("filepath")
+    doc5 = pd.read_csv("filepath")
+    
+    #dictionary created and keys must equal user input
+    years = {2016: doc1, 2017: doc2, 2018: doc3, 2019: doc4, 2020: doc5}
+
+    user_inp = int(input("Enter a year between and including 2016 and 2020: "))
+    
+    if user_inp in years.keys():
+        user_inp2 = years[int(user_inp)]
+        new_arr = np.array(user_inp2)
+        
+        #variables are selectiing the rows and columns to grpah! other variables can be used which can provide user with different rows and columns
+        x = new_arr[0:5, 0]
+        y = new_arr[0:5, 1]
+        z = new_arr[0:5, 2]
+
+        plt.subplot(1, 2, 1)
+        plt.title(str(user_inp) + str(" Average Quarterly Passenger Fare"))
+        plt.xlabel("Quarter")
+        plt.ylabel("Average Fare (USD)")
+        plt.plot(x, y, "ro")
+
+        plt.subplot(1, 2, 2)
+        plt.title(str(user_inp) + str(" Passenger Cost per mile"))
+        plt.xlabel("Quarter")
+        plt.ylabel("Average Cost per Flight Mile (USD)")
+        plt.plot(y / z, "bo")
+
+        plt.legend()
+        plt.show()
+
+
+graph_it()
